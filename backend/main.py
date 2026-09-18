@@ -12,6 +12,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from database import init_db, insert_conversation, get_dashboard_stats
+from analysis_customer import run_customer_analysis
+from analysis_security import run_security_analysis
 
 app = FastAPI(title="Customer Support Intelligence & Phishing Detection API")
 
@@ -37,35 +39,10 @@ class AnalyzeRequest(BaseModel):
     text: str
 
 
-# ---------- STUBBED analysis functions ----------
-# Member B replaces run_customer_analysis() in analysis_customer.py (Phase 4)
-# Member C replaces run_security_analysis() in analysis_security.py (Phase 5)
-# Until then, these dummy implementations return contract-shaped data.
-
-def run_customer_analysis(text: str) -> dict:
-    """STUB — replaced by backend/analysis_customer.py in Phase 4."""
-    return {
-        "category": "Other",
-        "sentiment": "Neutral",
-        "emotion": "None",
-        "priority": "Low",
-        "status": "Unresolved",
-        "summary": "Stubbed summary — customer intelligence module not yet wired in.",
-    }
-
-
-def run_security_analysis(text: str) -> dict:
-    """STUB — replaced by backend/analysis_security.py in Phase 5."""
-    return {
-        "threat_detected": False,
-        "threat_type": "None",
-        "urls_found": [],
-        "suspicious_urls": [],
-        "emails_found": [],
-        "suspicious_emails": [],
-        "social_engineering_flags": [],
-        "risk_level": "Low",
-    }
+# ---------- Analysis functions ----------
+# run_customer_analysis() -> backend/analysis_customer.py (Member B, Phase 4)
+# run_security_analysis() -> backend/analysis_security.py (Member C, Phase 5)
+# Both imported above. No stubs remain.
 
 
 def build_analysis_result(conversation_id: str, text: str) -> dict:
