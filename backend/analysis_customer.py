@@ -24,8 +24,7 @@ if not GEMINI_API_KEY:
     raise RuntimeError("GEMINI_API_KEY not set. Check your .env file.")
  
 genai.configure(api_key=GEMINI_API_KEY)
-_model = genai.GenerativeModel("gemini-1.5-flash")
- 
+_model = genai.GenerativeModel("gemini-3.5-flash") 
 _vader = SentimentIntensityAnalyzer()
  
 # STRICT VALUES — must match the API contract exactly

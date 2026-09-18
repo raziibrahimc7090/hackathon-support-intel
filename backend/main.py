@@ -1,8 +1,4 @@
 # backend/main.py
-# FastAPI entrypoint. Owned by Member A.
-# Routes: POST /analyze, POST /analyze-batch, GET /dashboard-data, GET /health
-# run_customer_analysis() and run_security_analysis() are stubbed here so the
-# server is runnable end-to-end before Phases 4-5 replace the stubs with real logic.
 
 import json
 from typing import List
@@ -12,64 +8,48 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from database import init_db, insert_conversation, get_dashboard_stats
+from analysis_customer import run_customer_analysis
+from analysis_security import run_security_analysis
 
-app = FastAPI(title="Customer Support Intelligence & Phishing Detection API")
 
-# CORS: allow the local frontend (index.html opened via file:// or a local static server)
+app = FastAPI(
+    title="Customer Support Intelligence & Phishing Detection API"
+)
+
+
+# ---------- CORS ----------
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # hackathon scope — tighten if time allows
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
+# ---------- Startup ----------
+
 @app.on_event("startup")
 def on_startup():
     init_db()
 
 
-# ---------- Request/Response models ----------
+# ---------- Request Models ----------
 
 class AnalyzeRequest(BaseModel):
     conversation_id: str
     text: str
 
 
-# ---------- STUBBED analysis functions ----------
-# Member B replaces run_customer_analysis() in analysis_customer.py (Phase 4)
-# Member C replaces run_security_analysis() in analysis_security.py (Phase 5)
-# Until then, these dummy implementations return contract-shaped data.
-
-def run_customer_analysis(text: str) -> dict:
-    """STUB — replaced by backend/analysis_customer.py in Phase 4."""
-    return {
-        "category": "Other",
-        "sentiment": "Neutral",
-        "emotion": "None",
-        "priority": "Low",
-        "status": "Unresolved",
-        "summary": "Stubbed summary — customer intelligence module not yet wired in.",
-    }
-
-
-def run_security_analysis(text: str) -> dict:
-    """STUB — replaced by backend/analysis_security.py in Phase 5."""
-    return {
-        "threat_detected": False,
-        "threat_type": "None",
-        "urls_found": [],
-        "suspicious_urls": [],
-        "emails_found": [],
-        "suspicious_emails": [],
-        "social_engineering_flags": [],
-        "risk_level": "Low",
-    }
-
+# ---------- Analysis ----------
 
 def build_analysis_result(conversation_id: str, text: str) -> dict:
-    """Combines customer + security analysis into the exact API contract shape."""
+    """
+    Run customer intelligence and security analysis,
+    then combine both results into the API response.
+    """
+
     customer_result = run_customer_analysis(text)
     security_result = run_security_analysis(text)
 
@@ -85,66 +65,138 @@ def build_analysis_result(conversation_id: str, text: str) -> dict:
     }
 
 
-# ---------- Routes ----------
+# ---------- Health ----------
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok"}
+    return {
+        "status": "ok"
+    }
 
+
+# ---------- Single Analysis ----------
 
 @app.post("/analyze")
 def analyze(request: AnalyzeRequest):
     try:
-        result = build_analysis_result(request.conversation_id, request.text)
+        result = build_analysis_result(
+            request.conversation_id,
+            request.text
+        )
 
-        # Persist to DB — include raw text for storage (not part of the API response contract)
-        insert_conversation({**result, "text": request.text})
+        # Store the complete result in the database
+        insert_conversation({
+            **result,
+            "text": request.text
+        })
 
         return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
 
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Analysis failed: {str(e)}"
+        )
+
+
+# ---------- Batch Analysis ----------
 
 @app.post("/analyze-batch")
 async def analyze_batch(file: UploadFile = File(...)):
     try:
         raw = await file.read()
 
-        if file.filename.endswith(".json"):
+        # JSON input
+        if file.filename and file.filename.lower().endswith(".json"):
             conversations = json.loads(raw)
-        elif file.filename.endswith(".csv"):
+
+        # CSV input
+        elif file.filename and file.filename.lower().endswith(".csv"):
             import pandas as pd
             import io
+
             df = pd.read_csv(io.BytesIO(raw))
             conversations = df.to_dict(orient="records")
+
         else:
-            raise HTTPException(status_code=400, detail="File must be .json or .csv")
+            raise HTTPException(
+                status_code=400,
+                detail="File must be .json or .csv"
+            )
+
+        if not isinstance(conversations, list):
+            raise HTTPException(
+                status_code=400,
+                detail="Input file must contain a list of conversations."
+            )
 
         results: List[dict] = []
-        for convo in conversations:
-            conversation_id = str(convo.get("conversation_id"))
-            text = str(convo.get("text", ""))
 
-            result = build_analysis_result(conversation_id, text)
-            insert_conversation({**result, "text": text})
+        for i, convo in enumerate(conversations):
+
+            conversation_id = str(
+                convo.get(
+                    "conversation_id",
+                    f"unknown_{i}"
+                )
+            )
+
+            text = str(
+                convo.get(
+                    "text",
+                    ""
+                )
+            )
+
+            if not text.strip():
+                continue
+
+            result = build_analysis_result(
+                conversation_id,
+                text
+            )
+
+            insert_conversation({
+                **result,
+                "text": text
+            })
+
             results.append(result)
 
         return results
 
     except HTTPException:
         raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Batch analysis failed: {str(e)}")
 
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Batch analysis failed: {str(e)}"
+        )
+
+
+# ---------- Dashboard ----------
 
 @app.get("/dashboard-data")
 def dashboard_data():
     try:
         return get_dashboard_stats()
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to fetch dashboard data: {str(e)}")
 
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to fetch dashboard data: {str(e)}"
+        )
+
+
+# ---------- Run Directly ----------
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True
+    )

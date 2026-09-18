@@ -1,0 +1,728 @@
+[
+  {
+    "conversation_id": "conv_0001",
+    "text": "Hi, I noticed a double charge on my invoice this month. Could you please look into this and process a refund for the extra charge?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0002",
+    "text": "I've been trying to reset my password for the last hour but I'm not receiving any reset emails. This is incredibly frustrating because I need to access my account for a presentation today.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0003",
+    "text": "My package was supposed to arrive three days ago and the tracking number hasn't updated since Monday. I paid extra for express shipping and this is completely unacceptable.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0004",
+    "text": "Hello, I purchased the annual subscription yesterday by mistake instead of the monthly one. Is it possible to switch me to the monthly plan and refund the difference?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0005",
+    "text": "Every time I try to export my monthly report, the screen just goes completely white and nothing downloads. Am I doing something wrong or is the system down?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0006",
+    "text": "Hi there! I was wondering if your software integrates with Slack, or if there's an API available for custom integrations?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0007",
+    "text": "Why was my card charged $49 today? I canceled my subscription last week and received a confirmation email, so why are you still taking my money?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0008",
+    "text": "I keep getting an error message saying 'invalid credentials' even though I'm using the exact password I saved in my browser. Did my account get deleted?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0009",
+    "text": "The tracking information says my order was delivered to the mailbox, but I've checked and there's nothing there. Could it have been sent to the wrong address?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0010",
+    "text": "The shoes I ordered arrived today but they are a completely different size than what I selected. I want to return these and get a full refund immediately.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0011",
+    "text": "Your mobile app keeps crashing every time I try to upload an image. I've already reinstalled it twice and it's still not working.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0012",
+    "text": "Could you tell me what the difference is between the Professional and Enterprise plans? I want to make sure we choose the right one for our team.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0013",
+    "text": "I received an email saying my payment failed, but my bank statement shows the funds were withdrawn. Can you check the status of my subscription?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0014",
+    "text": "I am locked out of my account because of your two-factor authentication system, which is not sending the SMS codes to my phone. Fix this now, I have urgent work to finish!",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0015",
+    "text": "Hi, I need to update my shipping address for order #48291. It hasn't shipped yet, so hopefully this is still possible.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0016",
+    "text": "The subscription renewed automatically today but I haven't used the tool in months. Would it be possible to get a refund for this renewal?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0017",
+    "text": "I found a typo on the settings page under the notifications tab. It says 'reciepients' instead of 'recipients'—just thought I'd let your team know!",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0018",
+    "text": "I've been looking all over your website but I can't find a phone number to call. Do you actually have a live customer support line or is it just this chat box?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0019",
+    "text": "My invoice doesn't show my company's VAT number, which I specifically added during checkout. I need a corrected invoice for my accounting department as soon as possible.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0020",
+    "text": "Hello, is there a way to merge two separate accounts under different email addresses? I accidentally created a second one yesterday.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0021",
+    "text": "The fragile item I ordered arrived today but it's completely shattered because there was barely any protective packaging. How do we resolve this?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0022",
+    "text": "This software is completely useless and doesn't do anything promised on your landing page. I want my money back right now.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0023",
+    "text": "Your update yesterday broke our entire workflow and now none of our automated emails are sending. This is costing us actual revenue and we need a hotfix immediately!",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0024",
+    "text": "I'm trying to set up my profile but I don't see where to upload my company logo. Can you guide me to the right settings page?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0025",
+    "text": "Hi, our team is growing and we need to add 5 more licenses to our billing plan. Can you help us update our subscription tier?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0026",
+    "text": "I was charged twice for my subscription this month. Can someone please look into this and reverse the second transaction?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0027",
+    "text": "I'm trying to log in but keep getting an 'Invalid Credentials' error. I just reset my password five minutes ago, so I don't understand why it's not working.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0028",
+    "text": "My order was supposed to arrive last Thursday and it is still showing as 'In Transit'. This is completely unacceptable as it was a birthday gift. I need an update on this immediately.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0029",
+    "text": "Hi, I'd like to request a refund for order #94827. The item didn't fit properly, and I have already shipped it back using your return label.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0030",
+    "text": "The dashboard is failing to load my monthly analytics reports today. I've tried clearing my cache and using a different browser, but it just keeps spinning. My team needs these numbers for a meeting in an hour.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0031",
+    "text": "Hello, does your software support integration with Salesforce? We are looking to migrate our CRM soon and want to ensure compatibility.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0032",
+    "text": "Why was I billed $149 today? I canceled my free trial three days ago specifically to avoid this charge. Refund this money to my card right now.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0033",
+    "text": "Hello, I seem to have locked myself out of my account after entering the wrong password too many times. Could you please help me unlock it?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0034",
+    "text": "The tracking number for my package hasn't updated in four days. It just says 'origin facility departed' and has no estimated delivery date anymore. Can you check what is going on?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0035",
+    "text": "Your product arrived completely broken, and I am not paying for return shipping. Send me a full refund today or I will file a dispute with my credit card company.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0036",
+    "text": "Every time I click the 'Save Changes' button on my profile page, nothing happens. Is there currently an outage on your website?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0037",
+    "text": "Is there a discount code available for non-profit organizations looking to purchase the annual plan?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0038",
+    "text": "I noticed a charge of $29.99 on my bank statement from your company, but I don't recall signing up for anything. Could you help me find out which account this is associated with? Thank you.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0039",
+    "text": "I am not receiving the two-factor authentication SMS codes to my phone. I've requested it three times and have been waiting for over twenty minutes now.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0040",
+    "text": "Hi there, my shipment is running a few days late according to the carrier. Is there any chance you could check if it has been lost?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0041",
+    "text": "I requested a cancelation last week, but I see a pending charge on my credit card today. Did my cancelation not go through correctly?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0042",
+    "text": "I found a minor bug in the mobile app where the search bar overlaps with the header menu on iOS. It makes it a bit difficult to tap. I wanted to report it so your dev team can take a look.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0043",
+    "text": "I've been searching your help center for an hour trying to find out how to export my data to a CSV file. Why is this basic feature so hard to find?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0044",
+    "text": "Could you please update my billing address on file to 456 Oak Street, Seattle, WA?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0045",
+    "text": "I cannot get into my account and I have an urgent client deadline. Your password reset email is simply not arriving in my inbox. This is costing me money!",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0046",
+    "text": "My order status says 'Delivered' but I haven't received anything at my door. Did the courier leave it somewhere else, or is the tracking status incorrect?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0047",
+    "text": "Hi, I purchased the wrong size shirt by mistake. Can I return this for a full refund so I can order the correct one?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0048",
+    "text": "Your API is constantly throwing 500 errors this afternoon, and it's breaking our entire production workflow. Fix your servers immediately!",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0049",
+    "text": "What is the difference between the Professional plan and the Enterprise plan? The pricing page doesn't make it clear what features are actually included in each.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0050",
+    "text": "I upgraded my plan to access the advanced features, but my account still says I am on the basic tier. I've already been billed for the upgrade. Please fix this as soon as possible.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0051",
+    "text": "Hi there, I noticed an extra charge on my invoice this month under 'add-on seats'. Could you please help me understand what this is for?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0052",
+    "text": "My package was supposed to arrive three days ago but the tracking has not updated since Tuesday. This is really frustrating as it's a birthday gift. Can you please look into where my order is?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0053",
+    "text": "Your app crashed again right in the middle of my presentation! This is the third time this week and it's making me look incredibly unprofessional to my clients. Fix this immediately or I am canceling my subscription.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0054",
+    "text": "Hello, I recently purchased the blue knit sweater (Order #88391) but it is too large. How can I initiate a return and get a refund?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0055",
+    "text": "I keep getting an 'Invalid Credentials' error when I try to log in, but I'm positive my password is correct because I just reset it. Is there an issue with your servers right now?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0056",
+    "text": "Do you have any plans to restock the leather boots in size 8 anytime soon? I'd love to purchase them if they become available again.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0057",
+    "text": "Why was I charged $149 today without any warning? I cancelled my trial subscription two days ago specifically so this wouldn't happen. I want my money back right now.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0058",
+    "text": "The tracking page says my order was delivered to my porch, but I've been home all day and nothing is here. Did the courier perhaps drop it off at a neighbor's house by mistake?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0059",
+    "text": "Hello, I'm trying to export my monthly analytics report to CSV, but the button seems to be unresponsive. I've tried clearing my browser cache but it still doesn't download.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0060",
+    "text": "I sent back my return over two weeks ago and still haven't received my refund. The tracking confirms you received the package. Why is this taking so long?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0061",
+    "text": "I am locked out of my account and your password reset email is simply not arriving in my inbox. I have checked my spam folder. I need to access my files urgently for a meeting in ten minutes!",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0062",
+    "text": "Hi, I was wondering if your eco-friendly packaging is fully recyclable or if it needs to be composted. Thanks!",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0063",
+    "text": "I'm looking at my billing portal and I see two different subscription plans active. Am I being double-charged, or is one of these just a placeholder?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0064",
+    "text": "This is completely unacceptable. My order finally arrived today but the box was crushed and the items inside are totally ruined. I expect a replacement shipped overnight at no extra charge.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0065",
+    "text": "Every time I upload a PNG image to my profile, it gets rotated 90 degrees automatically. Is there a setting I need to change to stop this from happening?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0066",
+    "text": "Hi, I ordered the wrong size by mistake. If I return the item, can I get store credit instead of a refund to my card?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0067",
+    "text": "Could you please help me update the email address associated with my account? I no longer have access to my old work email.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0068",
+    "text": "I'm trying to apply the 'WELCOME10' promo code at checkout, but it keeps saying it's expired even though I just signed up today. Is there a different code I should use?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0069",
+    "text": "I was promised a 20% discount by your sales representative, but my first invoice shows the full price. This is very misleading and I'd like this adjusted immediately.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0070",
+    "text": "Hello, is it possible to change the shipping address for order #49204? It hasn't shipped yet and I realized I entered my old address.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0071",
+    "text": "The team collaboration features aren't syncing in real-time today. My colleagues are making edits but I have to manually refresh the page to see them. This is slowing down our workflow significantly.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0072",
+    "text": "I've been trying to get a refund for a defective item for a month, and your team keeps ignoring my emails. If I don't get my money back this week, I'm filing a dispute with my credit card company.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0073",
+    "text": "Your two-factor authentication system is completely broken. I'm not receiving the SMS codes on my phone, so I can't log in to do my job today.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0074",
+    "text": "Hi, do you offer bulk discounts if I purchase 50 of your custom notebooks for a corporate event?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0075",
+    "text": "Hi, I need to update our company's tax ID on our billing profile so it displays on our upcoming invoices. Could you guide me to where I can do that?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0076",
+    "text": "I was just charged $49 for an annual subscription that I'm pretty sure I canceled last month. Can someone please look into this and reverse the charge?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0077",
+    "text": "Hi, I'm trying to log in but it keeps saying 'invalid credentials' even though I just reset my password. Is the server down or am I doing something wrong?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0078",
+    "text": "My order was supposed to arrive three days ago and the tracking hasn't updated since Tuesday. This was a birthday gift and now it's late, I need an update immediately.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0079",
+    "text": "Hello, I'd like to return the blue sweater from my recent order because the medium size is a bit too large for me. Could you please send me a return shipping label?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0080",
+    "text": "Every time I try to export my monthly analytics report to a PDF, the app crashes and forces me to reload the page. I've tried on both Chrome and Safari with the same result.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0081",
+    "text": "Quick question before I place my order: do your leather boots run true to size, or should I order a half size up?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0082",
+    "text": "You guys charged my credit card twice this month! I need this refunded right away, this is completely unacceptable.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0083",
+    "text": "I'm locked out of my account because the two-factor authentication code is not sending to my phone. I have a deadline in an hour and need to get in now.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0084",
+    "text": "My package says delivered on the tracking page but I've checked my porch and mailbox and there's nothing there. Did the courier deliver it to the wrong address?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0085",
+    "text": "This item arrived completely broken and damaged. I want a full refund, I don't even want a replacement at this point.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0086",
+    "text": "Hi there, some of my saved templates vanished from my dashboard this morning. Did there happen to be an update last night that might have caused this?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0087",
+    "text": "Does your team plan offer any integration with Slack or Microsoft Teams? We are looking to migrate from our current tool soon.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0088",
+    "text": "I noticed a 'processing fee' of $4.50 on my invoice that wasn't shown at checkout. Can you explain what this charge is for?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0089",
+    "text": "I can't seem to find where to change my account email address in the profile settings. Could you guide me on how to update it?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0090",
+    "text": "It's been over two weeks and my order still hasn't even shipped. If you can't ship it by tomorrow, please just cancel the order.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0091",
+    "text": "I signed up for the trial but forgot to cancel before it rolled over into the paid plan. I haven't used the software since then, so is it possible to get a refund?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0092",
+    "text": "The latest software update has completely broken the mobile app. It freezes on the splash screen and I can't access any of my work on the go.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0093",
+    "text": "Do you offer bulk discounts if we order 50 or more of the custom corporate notebooks?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0094",
+    "text": "I applied a 20% off promo code during checkout, but my receipt shows I was charged the full amount. Please adjust the invoice to reflect the discount.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0095",
+    "text": "I've clicked 'forgot password' five times now and your system still hasn't sent me the password reset link. Why is this taking so long?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0096",
+    "text": "Could you check the status of order number 84930? It has been stuck in transit at the local distribution center for five days now.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0097",
+    "text": "I sent back my return package last week and the tracking shows you received it on Wednesday. How long does it usually take for the refund to show up on my bank statement?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0098",
+    "text": "The drag-and-drop builder is extremely laggy today and won't let me align any elements properly. Is there an active bug with the editor right now?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0099",
+    "text": "I'm trying to compare the Pro and Enterprise plans but I don't see the exact storage limits listed on your pricing page. Could you clarify how much storage comes with each plan?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0100",
+    "text": "Hello, I need to update our company's billing address and VAT number for our upcoming invoices. Where can I upload our tax exemption certificate?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0101",
+    "text": "Hi, I noticed a double charge on my credit card statement for this month's subscription. Could you please look into this and process a refund for the extra charge?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0102",
+    "text": "Why was I charged $49 today? I cancelled my trial three days ago and have the confirmation email right here. I need this reversed immediately.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0103",
+    "text": "Hello, I’m trying to update my billing address but the system keeps throwing an error saying 'invalid postal code' even though it's correct. Can you help me update it on your end?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0104",
+    "text": "You guys charged me twice for the same order and now my account is overdrawn! I need someone to call me right now and fix this mess!",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0105",
+    "text": "I've been trying to reset my password but I'm not receiving the reset link in my inbox. I've already checked my spam folder.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0106",
+    "text": "Your login page is completely broken today. I enter my correct credentials, the page reloads, and nothing happens—no error message, nothing. I need to get into my account urgently.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0107",
+    "text": "Hi there, I can't seem to log in using my Google account anymore. Did something change with your sign-in options recently?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0108",
+    "text": "I am locked out of my account during a major client presentation because your 2FA system isn't sending the SMS codes. This is completely unacceptable!",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0109",
+    "text": "Hello, my order #98231 was supposed to arrive yesterday but the tracking status hasn't updated in three days. Could you please check on the status for me?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0110",
+    "text": "This is the third time my package has been delayed. I paid extra for express shipping specifically because I needed it by Friday, and now it's not coming until next Tuesday.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0111",
+    "text": "According to the tracking link, my package was delivered this morning, but I've searched my entire porch and spoke with my neighbors and nobody has seen it. Is it possible it was scanned early by mistake?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0112",
+    "text": "Where is my order?? It has been two weeks and it still hasn't even shipped! If you can't deliver it by tomorrow, just cancel the order.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0113",
+    "text": "I received the shoes yesterday, but unfortunately they are a bit too small for me. How do I go about initiating a return and getting a refund?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0114",
+    "text": "The product I received is completely different from what was pictured on your website. I want a full refund, and I shouldn't have to pay for the return shipping label either.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0115",
+    "text": "I initiated a refund last week and received an email saying it was processed, but I still don't see the funds in my bank account. How long does it usually take to show up?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0116",
+    "text": "This software is completely useless and doesn't do anything that was advertised on your landing page. I want my money back right now, this is a total rip-off.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0117",
+    "text": "Hi, I'm trying to export my monthly analytics report to a CSV file, but the export button seems to be unresponsive. I'm using Chrome on Mac.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0118",
+    "text": "Every time I try to upload an image to my project, the entire app crashes and forces me to reload. I've cleared my cache and tried different browsers, but the bug persists.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0119",
+    "text": "I'm looking at my dashboard and all of my saved templates have suddenly disappeared. Is there a temporary server outage affecting saved data right now?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0120",
+    "text": "Your latest update completely broke my team's workflow! The integration with Slack is failing constantly and we are losing valuable time because of this bug.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0121",
+    "text": "Do you offer any discounts for non-profit organizations or educational institutions? We are looking to onboard a team of 15 people.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0122",
+    "text": "I've been searching your help center for twenty minutes and can't find a simple answer about your API rate limits. What is the maximum number of requests allowed per minute on the basic plan?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0123",
+    "text": "Hello, I am interested in your service but I'm not sure which plan would be best for my small business. Is there someone I can speak with to get a recommendation?",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0124",
+    "text": "Why is it so hard to find a direct contact email on your website? I shouldn't have to fight through a useless chatbot just to ask a simple question.",
+    "_is_phishing_sample": false
+  },
+  {
+    "conversation_id": "conv_0125",
+    "text": "Hi, could you please tell me if this winter jacket is windproof? The description mentions it is water-resistant, but I couldn't find details about wind protection.",
+    "_is_phishing_sample": false
+  }
+  ,
+{
+  "conversation_id": "conv_0126",
+  "text": "URGENT: Your account will be suspended within 24 hours. Verify your password immediately at http://example.invalid/account-verify",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0127",
+  "text": "Security alert: We detected unusual activity on your account. Confirm your login credentials now at http://example.invalid/security",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0128",
+  "text": "Your subscription payment has failed. To prevent your account from being cancelled today, confirm your card details at http://example.invalid/payment",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0129",
+  "text": "URGENT ACTION REQUIRED: Your account has been flagged for suspicious activity. Send your password and verification code to support immediately.",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0130",
+  "text": "Your account will be locked in 2 hours unless you verify your identity. Please visit http://example.invalid/verify and enter your username and password.",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0131",
+  "text": "We noticed a login from an unknown device. If this was not you, verify your account credentials immediately at http://example.invalid/login",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0132",
+  "text": "FINAL WARNING: Your account access expires today. Click http://example.invalid/reactivate and enter your password to restore access.",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0133",
+  "text": "Customer Support: We need to confirm your account before processing your refund. Reply with your password and one-time verification code.",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0134",
+  "text": "Your recent payment could not be verified. To avoid service interruption, update your billing information at http://example.invalid/billing",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0135",
+  "text": "IMPORTANT SECURITY NOTICE: Someone attempted to access your account. Verify your password immediately or your account will be permanently suspended.",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0136",
+  "text": "Your support case requires immediate verification. Please provide your account password and authentication code so we can unlock your account.",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0137",
+  "text": "We are unable to deliver your package because your payment information is incomplete. Confirm your card details at http://example.invalid/delivery-payment",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0138",
+  "text": "URGENT ACCOUNT ALERT: Failure to verify your identity within 30 minutes will result in account suspension. Visit http://example.invalid/identity now.",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0139",
+  "text": "Your password has expired. To keep using your account, sign in and verify your current password at http://example.invalid/password-reset",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0140",
+  "text": "We detected suspicious activity on your billing account. Please send your card number, security code, and account password to complete verification.",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0141",
+  "text": "FINAL SECURITY WARNING: Your account is scheduled for suspension today. Confirm your credentials at http://example.invalid/secure-account immediately.",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0142",
+  "text": "Your refund is waiting for approval. To release the funds, verify your account by entering your username, password, and one-time code at http://example.invalid/refund",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0143",
+  "text": "We received a request to change your account email. If you did not request this, verify your password immediately at http://example.invalid/account-security",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0144",
+  "text": "URGENT: Your account has been temporarily restricted due to suspicious activity. Contact support by providing your password and authentication code for immediate restoration.",
+  "_is_phishing_sample": true
+},
+{
+  "conversation_id": "conv_0145",
+  "text": "Your payment method needs verification today. Failure to update it will cancel your subscription. Visit http://example.invalid/payment-verify to continue.",
+  "_is_phishing_sample": true
+}
+]
