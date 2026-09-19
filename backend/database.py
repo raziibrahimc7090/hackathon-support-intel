@@ -167,6 +167,38 @@ def get_dashboard_stats() -> dict:
             Conversation.threat_detected == True  # noqa: E712
         ).count()
 
+        recent_rows = (
+            session.query(Conversation)
+            .order_by(Conversation.id.desc())
+            .limit(50)
+            .all()
+        )
+
+        recent_conversations = [
+            {
+                "conversation_id": row.conversation_id,
+                "text": row.text,
+                "category": row.category,
+                "sentiment": row.sentiment,
+                "emotion": row.emotion,
+                "priority": row.priority,
+                "status": row.status,
+                "summary": row.summary,
+                "created_at": row.created_at.isoformat() if row.created_at else None,
+                "security": {
+                    "threat_detected": row.threat_detected,
+                    "threat_type": row.threat_type,
+                    "risk_level": row.risk_level,
+                    "urls_found": row.urls_found or [],
+                    "suspicious_urls": row.suspicious_urls or [],
+                    "emails_found": row.emails_found or [],
+                    "suspicious_emails": row.suspicious_emails or [],
+                    "social_engineering_flags": row.social_engineering_flags or [],
+                },
+            }
+            for row in recent_rows
+        ]
+
         return {
             "total_conversations": total,
             "sentiment_distribution": sentiment_distribution,
@@ -175,6 +207,7 @@ def get_dashboard_stats() -> dict:
             "critical_count": critical_count,
             "unresolved_count": unresolved_count,
             "threats_detected": threats_detected,
+            "recent_conversations": recent_conversations,
         }
     finally:
         session.close()
