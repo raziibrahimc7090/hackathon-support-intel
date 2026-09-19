@@ -1,301 +1,538 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Customer Support Intelligence & Phishing Detection Dashboard</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ela — AI Support Intelligence &amp; Threat Detection</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-  body { font-family: 'Inter', sans-serif; }
-  .badge { display: inline-block; padding: 2px 10px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
-  .badge-low { background: #dcfce7; color: #166534; }
-  .badge-medium { background: #fef9c3; color: #854d0e; }
-  .badge-high { background: #fed7aa; color: #9a3412; }
-  .badge-critical { background: #fecaca; color: #991b1b; }
-  .badge-resolved { background: #dcfce7; color: #166534; }
-  .badge-unresolved { background: #fee2e2; color: #991b1b; }
-  .table-scroll { max-height: 480px; overflow-y: auto; }
-</style>
-</head>
-<body class="bg-gray-50 text-gray-900 min-h-screen">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-<!-- Header -->
-<header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-  <div>
-    <h1 class="text-xl font-bold">Customer Support Intelligence &amp; Phishing Detection</h1>
-    <p class="text-sm text-gray-500">Live dashboard — analytics + security threat monitoring</p>
-  </div>
-  <button id="refreshBtn" class="bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-700">
-    Refresh Data
-  </button>
-</header>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
 
-<main class="p-6 max-w-7xl mx-auto space-y-6">
-
-  <!-- Live Analyze Box -->
-  <section class="bg-white rounded-xl border border-gray-200 p-5">
-    <h2 class="font-semibold mb-3">Live Analyze</h2>
-    <div class="flex gap-3">
-      <input id="analyzeInput" type="text" placeholder="Paste a customer message to analyze..."
-             class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900" />
-      <button id="analyzeBtn" class="bg-indigo-600 text-white text-sm font-medium px-5 py-2 rounded-lg hover:bg-indigo-700">
-        Analyze
-      </button>
-    </div>
-    <div id="analyzeResult" class="mt-4 hidden"></div>
-  </section>
-
-  <!-- KPI Cards -->
-  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-    <div class="bg-white rounded-xl border border-gray-200 p-5">
-      <p class="text-sm text-gray-500">Total Conversations</p>
-      <p id="kpiTotal" class="text-3xl font-bold mt-1">—</p>
-    </div>
-    <div class="bg-white rounded-xl border border-gray-200 p-5">
-      <p class="text-sm text-gray-500">Critical Priority</p>
-      <p id="kpiCritical" class="text-3xl font-bold mt-1 text-red-600">—</p>
-    </div>
-    <div class="bg-white rounded-xl border border-gray-200 p-5">
-      <p class="text-sm text-gray-500">Unresolved</p>
-      <p id="kpiUnresolved" class="text-3xl font-bold mt-1 text-amber-600">—</p>
-    </div>
-    <div class="bg-white rounded-xl border border-gray-200 p-5">
-      <p class="text-sm text-gray-500">Threats Detected</p>
-      <p id="kpiThreats" class="text-3xl font-bold mt-1 text-rose-600">—</p>
-    </div>
-  </section>
-
-  <!-- Charts -->
-  <section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-    <div class="bg-white rounded-xl border border-gray-200 p-5">
-      <h2 class="font-semibold mb-3">Sentiment Distribution</h2>
-      <canvas id="sentimentChart" height="220"></canvas>
-    </div>
-    <div class="bg-white rounded-xl border border-gray-200 p-5">
-      <h2 class="font-semibold mb-3">Category Distribution</h2>
-      <canvas id="categoryChart" height="220"></canvas>
-    </div>
-  </section>
-
-  <!-- Security Alerts Panel -->
-  <section class="bg-white rounded-xl border-2 border-red-400 p-5">
-    <h2 class="font-semibold mb-3 text-red-700">🔒 Security Alerts</h2>
-    <div id="securityAlerts" class="space-y-2 text-sm">
-      <p class="text-gray-400">No alerts loaded yet.</p>
-    </div>
-  </section>
-
-  <!-- Conversation Table -->
-  <section class="bg-white rounded-xl border border-gray-200 p-5">
-    <h2 class="font-semibold mb-3">All Conversations</h2>
-    <div class="table-scroll">
-      <table class="w-full text-sm">
-        <thead class="sticky top-0 bg-white border-b border-gray-200 text-left text-gray-500">
-          <tr>
-            <th class="py-2 pr-3">ID</th>
-            <th class="py-2 pr-3">Category</th>
-            <th class="py-2 pr-3">Sentiment</th>
-            <th class="py-2 pr-3">Priority</th>
-            <th class="py-2 pr-3">Status</th>
-            <th class="py-2 pr-3">Risk</th>
-            <th class="py-2 pr-3">Summary</th>
-          </tr>
-        </thead>
-        <tbody id="conversationTableBody"></tbody>
-      </table>
-    </div>
-  </section>
-
-</main>
-
-<script>
-  // Backend base URL — top-level variable per spec
-  const API_BASE = "http://localhost:8000";
-
-  let sentimentChartInstance = null;
-  let categoryChartInstance = null;
-
-  // In-memory store of analyzed conversations shown in the table/alerts panel
-  // (batch/dashboard data does not currently return raw per-row results, so this
-  // fills from live /analyze calls plus a fetch of dashboard aggregates)
-  let conversationRows = [];
-
-  function badgeClass(value, kind) {
-    const v = (value || "").toLowerCase();
-    if (kind === "status") {
-      return v === "resolved" ? "badge badge-resolved" : "badge badge-unresolved";
-    }
-    // priority / risk share the same scale
-    if (v === "low") return "badge badge-low";
-    if (v === "medium") return "badge badge-medium";
-    if (v === "high") return "badge badge-high";
-    if (v === "critical") return "badge badge-critical";
-    return "badge";
-  }
-
-  function renderTable() {
-    const tbody = document.getElementById("conversationTableBody");
-    tbody.innerHTML = "";
-    if (conversationRows.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="7" class="py-4 text-gray-400">No conversations analyzed yet in this session.</td></tr>`;
-      return;
-    }
-    conversationRows.slice().reverse().forEach(row => {
-      const tr = document.createElement("tr");
-      tr.className = "border-b border-gray-100";
-      tr.innerHTML = `
-        <td class="py-2 pr-3 font-mono text-xs">${row.conversation_id}</td>
-        <td class="py-2 pr-3">${row.category}</td>
-        <td class="py-2 pr-3">${row.sentiment}</td>
-        <td class="py-2 pr-3"><span class="${badgeClass(row.priority)}">${row.priority}</span></td>
-        <td class="py-2 pr-3"><span class="${badgeClass(row.status, 'status')}">${row.status}</span></td>
-        <td class="py-2 pr-3"><span class="${badgeClass(row.security.risk_level)}">${row.security.risk_level}</span></td>
-        <td class="py-2 pr-3 text-gray-600">${row.summary}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  }
-
-  function renderSecurityAlerts() {
-    const container = document.getElementById("securityAlerts");
-    const threats = conversationRows.filter(r => r.security.threat_detected);
-    if (threats.length === 0) {
-      container.innerHTML = `<p class="text-gray-400">No threats detected in this session.</p>`;
-      return;
-    }
-    container.innerHTML = threats.slice().reverse().map(r => `
-      <div class="border border-red-200 bg-red-50 rounded-lg p-3">
-        <div class="flex justify-between items-center">
-          <span class="font-semibold text-red-700">${r.security.threat_type}</span>
-          <span class="${badgeClass(r.security.risk_level)}">${r.security.risk_level}</span>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <div class="brand-row">
+          <div class="brand-mark">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </div>
+          <div>
+            <div class="brand-name">Ela <span class="brand-badge">PRO</span></div>
+            <div class="brand-sub">Support &amp; Cyber Intel</div>
+          </div>
         </div>
-        <p class="text-xs text-gray-600 mt-1">${r.conversation_id} — ${r.summary}</p>
-        ${r.security.suspicious_urls.length ? `<p class="text-xs text-red-600 mt-1">URLs: ${r.security.suspicious_urls.join(", ")}</p>` : ""}
-        ${r.security.suspicious_emails.length ? `<p class="text-xs text-red-600 mt-1">Emails: ${r.security.suspicious_emails.join(", ")}</p>` : ""}
+
+        <div class="nav-section-label">Navigation</div>
+        <div class="nav-item active" data-nav-target="overview">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="9" rx="2" />
+            <rect x="14" y="3" width="7" height="5" rx="2" />
+            <rect x="14" y="12" width="7" height="9" rx="2" />
+            <rect x="3" y="16" width="7" height="5" rx="2" />
+          </svg>
+          Overview
+        </div>
+        <div class="nav-item" data-nav-target="live-analyzer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+          Live Analyzer
+        </div>
+        <div class="nav-item" data-nav-target="threat-intel">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          Threat Feed
+          <span id="navAlertBadge" class="nav-badge hidden">0</span>
+        </div>
+        <div class="nav-item" data-nav-target="ledger">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          Ticket Ledger
+        </div>
+
+        <div class="nav-section-label mt-auto">Actions</div>
+        <button id="openBatchBtn" class="btn-action-sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          Upload Batch Data
+        </button>
+
+        <div class="sidebar-footer">
+          <div class="system-status">
+            <span class="status-indicator live" id="sidebarDot"></span>
+            <div class="status-info">
+              <span class="status-text" id="sidebarStatusText">Engine Operational</span>
+              <span class="status-sub" id="sidebarStatusSub">PostgreSQL + Gemini 1.5</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Layout -->
+      <div class="main-wrapper flex flex-col min-h-screen">
+        <!-- Top Header Bar -->
+        <header class="top-bar">
+          <div class="header-left">
+            <h1 class="header-title">Support Intelligence Dashboard</h1>
+            <div class="header-sub">
+              <span>Real-Time Phishing Threat Protection &amp; Customer Analytics</span>
+              <span class="dot-divider">•</span>
+              <span class="pulse-container">
+                <span id="liveDot" class="pulse-dot"></span>
+                <span id="liveLabel" class="live-label">Connecting…</span>
+              </span>
+              <span id="lastUpdated" class="last-updated font-mono-data"></span>
+            </div>
+          </div>
+
+          <div class="header-right">
+            <!-- Search input -->
+            <div class="header-search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="text" id="globalSearchInput" placeholder="Search ticket text, ID, domain..." />
+            </div>
+
+            <button id="refreshBtn" class="icon-btn" title="Refresh Dashboard">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+                <polyline points="21 3 21 9 15 9" />
+              </svg>
+            </button>
+
+            <button id="batchHeaderBtn" class="btn-primary-sm">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              Batch Ingestion
+            </button>
+
+            <div class="user-avatar" title="Security Admin">SA</div>
+          </div>
+        </header>
+
+        <!-- Main Content Canvas -->
+        <main class="content-canvas">
+          <!-- Overview Section -->
+          <div data-nav-section="overview" class="space-y-6">
+            <!-- Stat Cards Bar (5 KPI Cards) -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              <!-- Card 1: Total Volume -->
+              <div class="stat-card">
+                <div class="stat-header">
+                  <div class="stat-icon-wrap icon-purple">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                  </div>
+                  <span id="statTotalDelta" class="stat-delta"></span>
+                </div>
+                <div id="statTotalValue" class="stat-value">—</div>
+                <div class="stat-title">Total Conversations</div>
+                <div id="statTotalSpark" class="spark-container"></div>
+              </div>
+
+              <!-- Card 2: Security Threat Rate -->
+              <div class="stat-card stat-card-threat">
+                <div class="stat-header">
+                  <div class="stat-icon-wrap icon-red">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                  </div>
+                  <span id="statThreatRateDelta" class="stat-delta"></span>
+                </div>
+                <div id="statThreatRateValue" class="stat-value text-red-400">—</div>
+                <div class="stat-title">Security Threat Rate</div>
+                <div id="statThreatRateSpark" class="spark-container"></div>
+              </div>
+
+              <!-- Card 3: Critical Priority -->
+              <div class="stat-card">
+                <div class="stat-header">
+                  <div class="stat-icon-wrap icon-orange">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
+                      <line x1="12" y1="9" x2="12" y2="13" />
+                      <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                  </div>
+                  <span id="statCriticalDelta" class="stat-delta"></span>
+                </div>
+                <div id="statCriticalValue" class="stat-value">—</div>
+                <div class="stat-title">Critical Escalations</div>
+                <div id="statCriticalSpark" class="spark-container"></div>
+              </div>
+
+              <!-- Card 4: Sentiment Score -->
+              <div class="stat-card">
+                <div class="stat-header">
+                  <div class="stat-icon-wrap icon-blue">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                    </svg>
+                  </div>
+                  <span id="heroDelta" class="stat-delta"></span>
+                </div>
+                <div id="heroSentimentValue" class="stat-value">—</div>
+                <div class="stat-title">Dominant Sentiment (<span id="heroSentimentScore"></span>)</div>
+                <div id="heroSpark" class="spark-container"></div>
+              </div>
+
+              <!-- Card 5: Resolved Rate -->
+              <div class="stat-card">
+                <div class="stat-header">
+                  <div class="stat-icon-wrap icon-green">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                  </div>
+                  <span id="statResolvedRateDelta" class="stat-delta"></span>
+                </div>
+                <div id="statResolvedRateValue" class="stat-value text-emerald-400">—</div>
+                <div class="stat-title">Resolved Rate</div>
+                <div id="statResolvedRateSpark" class="spark-container"></div>
+              </div>
+            </section>
+
+            <!-- Visual Analytics Grid: Gauge, Sentiment Donut & Category Chart -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <!-- Risk Gauge & Breakdown -->
+              <div class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Threat Risk Index</h3>
+                    <p class="panel-subtitle">Rule-based threat scoring &amp; vectors</p>
+                  </div>
+                  <span class="badge-tag badge-tag-red">Deterministic</span>
+                </div>
+                <div class="panel-body flex flex-col items-center justify-between">
+                  <div class="gauge-wrapper">
+                    <div id="riskGauge" class="gauge-svg-box"></div>
+                    <div id="gaugeValue" class="gauge-score-value">—</div>
+                    <div id="gaugeCaption" class="gauge-score-caption">—</div>
+                  </div>
+                  <div id="riskMetrics" class="w-full space-y-2 mt-4"></div>
+                </div>
+              </div>
+
+              <!-- Sentiment Distribution Donut -->
+              <div class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Sentiment Distribution</h3>
+                    <p class="panel-subtitle">VADER NLP Polarity Analysis</p>
+                  </div>
+                  <span class="badge-tag badge-tag-blue">NLP VADER</span>
+                </div>
+                <div class="panel-body flex flex-col justify-center">
+                  <div class="chart-container-donut">
+                    <canvas id="sentimentChart"></canvas>
+                  </div>
+                  <div id="sentimentLegend" class="legend-grid mt-4"></div>
+                </div>
+              </div>
+
+              <!-- Category Distribution Bar Chart -->
+              <div class="panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">Category Breakdown</h3>
+                    <p class="panel-subtitle">Support issue distribution</p>
+                  </div>
+                  <span class="badge-tag badge-tag-purple">Gemini LLM</span>
+                </div>
+                <div class="panel-body flex flex-col justify-center">
+                  <div class="chart-container-bar">
+                    <canvas id="categoryChart"></canvas>
+                  </div>
+                  <div id="topIssuesList" class="mt-3"></div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Live Analyzer Playground Section -->
+          <div data-nav-section="live-analyzer" class="panel mt-6">
+            <div class="panel-header">
+              <div>
+                <h3 class="panel-title">Live Ticket Analyzer &amp; Threat Detector Playground</h3>
+                <p class="panel-subtitle">Test any support message against the Gemini + Security Detection pipeline in real-time</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="badge-tag badge-tag-green">POST /analyze</span>
+              </div>
+            </div>
+            <div class="panel-body space-y-4">
+              <!-- Preset Buttons -->
+              <div class="preset-bar">
+                <span class="preset-label">Quick Test Presets:</span>
+                <button class="preset-chip" data-preset="phishing">
+                  <span class="dot-red"></span> Phishing &amp; Urgent Password Link
+                </button>
+                <button class="preset-chip" data-preset="ip-shortener">
+                  <span class="dot-red"></span> IP Address &amp; Shortener URL
+                </button>
+                <button class="preset-chip" data-preset="billing">
+                  <span class="dot-blue"></span> Normal Billing Refund Query
+                </button>
+                <button class="preset-chip" data-preset="login">
+                  <span class="dot-blue"></span> Password Reset Problem
+                </button>
+              </div>
+
+              <!-- Input Area -->
+              <div class="input-group">
+                <textarea
+                  id="analyzeInput"
+                  rows="3"
+                  placeholder="Paste a customer message, support email, or ticket payload to analyze..."
+                  class="analyze-textarea"
+                ></textarea>
+                <div class="input-action-bar">
+                  <span class="text-xs text-slate-400">Press <kbd class="kbd">Enter</kbd> to run live inspection</span>
+                  <button id="analyzeBtn" class="btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    Run Live Inspection
+                  </button>
+                </div>
+              </div>
+
+              <!-- Output Container -->
+              <div id="analyzeResult" class="hidden"></div>
+            </div>
+          </div>
+
+          <!-- Threat Feed & AI Diagnostics Section -->
+          <div data-nav-section="threat-intel" class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+            <!-- Security Alerts Stream (2 Cols) -->
+            <div class="panel lg:col-span-2">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">Security Threat Stream</h3>
+                  <p class="panel-subtitle">Real-time flagged phishing attempts &amp; social engineering vectors</p>
+                </div>
+                <span id="threatCountBadge" class="badge-count text-red-400">0 Threats</span>
+              </div>
+              <div id="securityAlerts" class="ledger-scroll"></div>
+            </div>
+
+            <!-- AI Insights Panel (1 Col) -->
+            <div class="panel">
+              <div class="panel-header">
+                <div>
+                  <h3 class="panel-title">AI Diagnostic Stream</h3>
+                  <p class="panel-subtitle">Automated system highlights &amp; alerts</p>
+                </div>
+              </div>
+              <div id="insightsList" class="panel-body-flush divide-y divide-slate-800/50"></div>
+            </div>
+          </div>
+
+          <!-- Master Ticket Ledger Table Section -->
+          <div data-nav-section="ledger" class="panel mt-6 mb-12">
+            <div class="panel-header flex-wrap gap-4">
+              <div>
+                <h3 class="panel-title">Master Conversation Ledger</h3>
+                <p class="panel-subtitle">Analyzed customer support tickets stored in PostgreSQL</p>
+              </div>
+
+              <!-- Controls & Filters -->
+              <div class="flex items-center gap-3 flex-wrap">
+                <select id="categoryFilter" class="filter-select">
+                  <option value="ALL">All Categories</option>
+                  <option value="Billing">Billing</option>
+                  <option value="Login">Login</option>
+                  <option value="Delivery">Delivery</option>
+                  <option value="Refund">Refund</option>
+                  <option value="Technical">Technical</option>
+                  <option value="Security">Security</option>
+                  <option value="Other">Other</option>
+                </select>
+
+                <select id="priorityFilter" class="filter-select">
+                  <option value="ALL">All Priorities</option>
+                  <option value="Critical">Critical</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+
+                <select id="threatFilter" class="filter-select">
+                  <option value="ALL">All Threat Statuses</option>
+                  <option value="THREAT_ONLY">Security Threats Only</option>
+                  <option value="CLEAN_ONLY">Clean Tickets Only</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="master-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Ticket ID</th>
+                    <th>Category</th>
+                    <th>Message Summary / Preview</th>
+                    <th>Sentiment</th>
+                    <th>Priority</th>
+                    <th>Threat Risk</th>
+                    <th>Status</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="topConversationsBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
       </div>
-    `).join("");
-  }
+    </div>
 
-  function renderCharts(dashboardData) {
-    const sentimentCtx = document.getElementById("sentimentChart");
-    const categoryCtx = document.getElementById("categoryChart");
-
-    if (sentimentChartInstance) sentimentChartInstance.destroy();
-    if (categoryChartInstance) categoryChartInstance.destroy();
-
-    const sentiment = dashboardData.sentiment_distribution || { Positive: 0, Neutral: 0, Negative: 0 };
-    sentimentChartInstance = new Chart(sentimentCtx, {
-      type: "doughnut",
-      data: {
-        labels: Object.keys(sentiment),
-        datasets: [{
-          data: Object.values(sentiment),
-          backgroundColor: ["#22c55e", "#94a3b8", "#ef4444"]
-        }]
-      },
-      options: { responsive: true }
-    });
-
-    const category = dashboardData.category_distribution || {};
-    categoryChartInstance = new Chart(categoryCtx, {
-      type: "bar",
-      data: {
-        labels: Object.keys(category),
-        datasets: [{
-          label: "Conversations",
-          data: Object.values(category),
-          backgroundColor: "#6366f1"
-        }]
-      },
-      options: { responsive: true, plugins: { legend: { display: false } } }
-    });
-  }
-
-  function renderKpis(data) {
-    document.getElementById("kpiTotal").textContent = data.total_conversations ?? "—";
-    document.getElementById("kpiCritical").textContent = data.critical_count ?? "—";
-    document.getElementById("kpiUnresolved").textContent = data.unresolved_count ?? "—";
-    document.getElementById("kpiThreats").textContent = data.threats_detected ?? "—";
-  }
-
-  async function loadDashboard() {
-    try {
-      const res = await fetch(`${API_BASE}/dashboard-data`);
-      if (!res.ok) throw new Error(`Dashboard fetch failed: ${res.status}`);
-      const data = await res.json();
-      renderKpis(data);
-      renderCharts(data);
-    } catch (err) {
-      console.error(err);
-      alert("Could not load dashboard data. Is the backend running at " + API_BASE + "?");
-    }
-  }
-
-  async function analyzeMessage() {
-    const input = document.getElementById("analyzeInput");
-    const text = input.value.trim();
-    if (!text) return;
-
-    const resultBox = document.getElementById("analyzeResult");
-    resultBox.classList.remove("hidden");
-    resultBox.innerHTML = `<p class="text-sm text-gray-400">Analyzing...</p>`;
-
-    const conversationId = "live_" + Date.now();
-
-    try {
-      const res = await fetch(`${API_BASE}/analyze`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ conversation_id: conversationId, text })
-      });
-      if (!res.ok) throw new Error(`Analyze failed: ${res.status}`);
-      const result = await res.json();
-
-      conversationRows.push(result);
-      renderTable();
-      renderSecurityAlerts();
-
-      resultBox.innerHTML = `
-        <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
-          <div class="flex flex-wrap gap-2 mb-2">
-            <span class="badge bg-gray-200 text-gray-700">${result.category}</span>
-            <span class="badge bg-gray-200 text-gray-700">${result.sentiment}</span>
-            <span class="badge bg-gray-200 text-gray-700">${result.emotion}</span>
-            <span class="${badgeClass(result.priority)}">${result.priority}</span>
-            <span class="${badgeClass(result.status, 'status')}">${result.status}</span>
+    <!-- Ticket Detailed Inspector Drawer / Modal -->
+    <div id="inspectorModal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="flex items-center gap-3">
+            <span class="modal-icon-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </span>
+            <div>
+              <h3 id="modalTicketId" class="modal-title font-mono-data">Ticket #—</h3>
+              <p id="modalTicketSub" class="modal-sub">Analyzed Conversation Inspector</p>
+            </div>
           </div>
-          <p class="text-sm text-gray-700 mb-2"><strong>Summary:</strong> ${result.summary}</p>
-          <div class="text-sm ${result.security.threat_detected ? 'text-red-700' : 'text-green-700'}">
-            <strong>Security:</strong> ${result.security.threat_detected ? '⚠️ Threat detected' : '✓ No threat detected'}
-            — ${result.security.threat_type} (Risk: <span class="${badgeClass(result.security.risk_level)}">${result.security.risk_level}</span>)
+          <button id="closeModalBtn" class="modal-close-btn">&times;</button>
+        </div>
+
+        <div class="modal-body space-y-6">
+          <!-- Full Text Card -->
+          <div class="detail-block">
+            <div class="detail-label">Full Customer Message Payload</div>
+            <div id="modalFullText" class="detail-text-box"></div>
+          </div>
+
+          <!-- Metadata Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="detail-stat">
+              <span class="detail-stat-label">Category</span>
+              <span id="modalCategory" class="detail-stat-val">—</span>
+            </div>
+            <div class="detail-stat">
+              <span class="detail-stat-label">Sentiment</span>
+              <span id="modalSentiment" class="detail-stat-val">—</span>
+            </div>
+            <div class="detail-stat">
+              <span class="detail-stat-label">Priority</span>
+              <span id="modalPriority" class="detail-stat-val">—</span>
+            </div>
+            <div class="detail-stat">
+              <span class="detail-stat-label">Status</span>
+              <span id="modalStatus" class="detail-stat-val">—</span>
+            </div>
+          </div>
+
+          <!-- Summary Block -->
+          <div class="detail-block">
+            <div class="detail-label">Gemini AI Summary</div>
+            <div id="modalSummary" class="detail-summary-box"></div>
+          </div>
+
+          <!-- Security Analysis Card -->
+          <div class="detail-block detail-block-security">
+            <div class="flex items-center justify-between mb-2">
+              <div class="detail-label text-red-400">Security Phishing Analysis</div>
+              <span id="modalRiskBadge" class="chip chip-neutral">—</span>
+            </div>
+            <div id="modalSecurityContent" class="space-y-3"></div>
+          </div>
+
+          <!-- Raw JSON Toggle -->
+          <div class="detail-block">
+            <div class="flex items-center justify-between mb-2">
+              <div class="detail-label">Raw API JSON Payload</div>
+              <button id="copyJsonBtn" class="btn-xs">Copy JSON</button>
+            </div>
+            <pre id="modalRawJson" class="raw-json-box font-mono-data"></pre>
           </div>
         </div>
-      `;
+      </div>
+    </div>
 
-      loadDashboard(); // refresh KPIs/charts with the newly inserted row
-    } catch (err) {
-      console.error(err);
-      resultBox.innerHTML = `<p class="text-sm text-red-600">Error analyzing message. Is the backend running at ${API_BASE}?</p>`;
-    }
-  }
+    <!-- Batch Upload Modal -->
+    <div id="batchModal" class="modal-backdrop hidden">
+      <div class="modal-card max-w-lg">
+        <div class="modal-header">
+          <div class="flex items-center gap-3">
+            <span class="modal-icon-badge icon-purple">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </span>
+            <div>
+              <h3 class="modal-title">Batch Ingestion Pipeline</h3>
+              <p class="modal-sub">Upload bulk JSON or CSV datasets for automated analysis</p>
+            </div>
+          </div>
+          <button id="closeBatchModalBtn" class="modal-close-btn">&times;</button>
+        </div>
 
-  document.getElementById("analyzeBtn").addEventListener("click", analyzeMessage);
-  document.getElementById("analyzeInput").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") analyzeMessage();
-  });
-  document.getElementById("refreshBtn").addEventListener("click", loadDashboard);
+        <div class="modal-body space-y-4">
+          <div id="dropzone" class="dropzone">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-indigo-400 mb-2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <p class="font-semibold text-sm">Drag &amp; drop dataset file here</p>
+            <p class="text-xs text-slate-400 mt-1">Supports <code class="font-mono-data text-indigo-300">.json</code> or <code class="font-mono-data text-indigo-300">.csv</code> files containing conversation objects</p>
+            <input type="file" id="batchFileInput" accept=".json,.csv" class="hidden" />
+            <button id="selectFileBtn" class="btn-primary-sm mt-3">Browse Files</button>
+          </div>
 
-  // Initial load
-  loadDashboard();
-  renderTable();
-  renderSecurityAlerts();
-</script>
+          <div id="batchStatusBox" class="hidden text-xs font-mono-data p-3 rounded-lg bg-slate-900 border border-slate-700"></div>
+        </div>
+      </div>
+    </div>
 
-</body>
+    <!-- App Logic -->
+    <script src="app.js"></script>
+  </body>
 </html>

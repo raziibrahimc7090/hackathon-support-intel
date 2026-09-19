@@ -181,12 +181,21 @@ async def analyze_batch(file: UploadFile = File(...)):
 def dashboard_data():
     try:
         return get_dashboard_stats()
-
     except Exception as e:
         raise HTTPException(
             status_code=500,
             detail=f"Failed to fetch dashboard data: {str(e)}"
         )
+
+
+# ---------- Static Files (Frontend App) ----------
+
+import os
+from fastapi.staticfiles import StaticFiles
+
+frontend_dir = os.path.join(os.path.dirname(__file__), "..", "frontend")
+if os.path.exists(frontend_dir):
+    app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
 
 
 # ---------- Run Directly ----------

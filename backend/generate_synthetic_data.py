@@ -32,7 +32,7 @@ _SAFETY_SETTINGS = [
     {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
 ]
 
-_model = genai.GenerativeModel("gemini-3.5-flash", safety_settings=_SAFETY_SETTINGS)
+_model = genai.GenerativeModel("gemini-1.5-flash", safety_settings=_SAFETY_SETTINGS)
 
 TOTAL_CONVERSATIONS = 180
 BATCH_SIZE = 25  # 20-30 per call as required, for normal conversations
